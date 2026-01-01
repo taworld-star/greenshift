@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Create Admin User
+        // Admin User
         $admin = User::create([
             'name' => 'Admin GreenShift',
             'email' => 'admin@greenshift.com',
@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
         ]);
 
-        // Create Regular User
+        // Regular User
         $user = User::create([
             'name' => 'User Demo',
             'email' => 'user@greenshift.com',
@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             'role' => 'user',
         ]);
 
-        // Create Sample Educational Contents
+        // Sample Educational Contents
         EducationalContent::create([
             'title' => 'Apa itu Sampah Organik?',
             'content' => 'Sampah organik adalah sampah yang berasal dari makhluk hidup dan dapat terurai secara alami. Contoh: sisa makanan, kulit buah, daun, dll.',
