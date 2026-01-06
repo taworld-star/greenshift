@@ -8,12 +8,12 @@ from PIL import Image, ImageOps
 app = Flask(__name__)
 CORS(app) # Agar bisa diakses dari luar (Laravel/Flutter)
 
-# --- KONFIGURASI ---
+# KONFIGURASI 
 MODEL_PATH = 'keras_model.h5'
 LABELS_PATH = 'labels.txt'
 
 
-# --- DESCRIPTIONS & TIPS ---
+# DESCRIPTIONS & TIPS 
 DESCRIPTIONS = {
     'organik': 'Sampah organik yang dapat terurai secara alami.',
     'anorganik': 'Sampah anorganik/non-organik sulit terurai.',
@@ -26,7 +26,7 @@ DISPOSAL_METHODS = {
     'b3': 'BAHAYA! Jangan dibuang sembarangan. Pisahkan wadah tertutup dan serahkan ke petugas khusus.'
 }
 
-# --- LOAD MODEL ---
+# LOAD MODEL 
 print(" Loading AI Model...")
 try:
     model = keras.models.load_model(MODEL_PATH, compile=False)
@@ -35,7 +35,7 @@ except Exception as e:
     print(f"Eror saat memuat model: {e}")
     model = None
 
-# --- LOAD LABELS ---
+# LOAD LABELS
 try:
     with open(LABELS_PATH, 'r') as f:
         labels = [line.strip() for line in f.readlines()]
@@ -45,9 +45,9 @@ except Exception as e:
     labels = ['0 organik', '1 anorganik', '2 b3'] # Default fallback
 
     
-def process_image(image_file):
-    # 1. Membuka gambar & ubah ke RGB
-    image = Image.open(image_file).convert("RGB")
+def preprocess_image(image):
+    # 1. Membuka gambar & mengubah ke RGB
+    image = image.convert("RGB")
     
     # 2. Size ke 224x224 (Standar Teachable Machine)
     size = (224, 224)
@@ -66,7 +66,7 @@ def process_image(image_file):
 def home():
     return jsonify({
         "status": "online",
-        "message": "Server AI GreenShift Jalan! Gunakan POST /predict untuk upload."
+        "message": "Server AI GreenShift Jalan! Gunakan POST /predict untuk upload.",
         "model_loaded": model is not None,
     })
 
@@ -100,7 +100,7 @@ def predict():
         
         # --- CLEANING LABEL ---
         # Mengubah "0 Organik" menjadi "organik"
-        # Mengubah "1 Non Organik" menjadi "anorganik" (biar match sama dictionary)
+        # Mengubah "1 Non Organik" menjadi "anorganik"
         clean_label = raw_label.lower()
         
         # Hapus angka di depan (misal "0 ", "1 ")
@@ -117,7 +117,7 @@ def predict():
         else:
             final_key = "unknown"
 
-        # --- BUILD ALL PREDICTIONS ---
+        # BUILD ALL PREDICTIONS
         # Membuat daftar persentase untuk semua kemungkinan
         all_preds = {}
         for i, label_name in enumerate(labels):
@@ -125,7 +125,7 @@ def predict():
             clean_name = label_name.lower()
             for k in range(10): clean_name = clean_name.replace(str(k), "").strip()
             
-            # Masukkan ke dictionary
+            # Memasukkan ke dictionary
             score = float(predictions[0][i])
             all_preds[clean_name] = round(score, 4)
 
@@ -136,7 +136,7 @@ def predict():
             'confidence': round(confidence, 4),
             'description': DESCRIPTIONS.get(final_key, 'Kategori tidak dikenali'),
             'disposal_method': DISPOSAL_METHODS.get(final_key, 'Hubungi petugas kebersihan.'),
-            'all_predictions': all_preds # Ini data lengkap persen-persennya
+            'all_predictions': all_preds # Semua prediksi dengan skor
         }
         
         return jsonify(response), 200
