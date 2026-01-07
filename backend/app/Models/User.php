@@ -46,4 +46,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+        /**
+     * Relasi ke UserProfile
+     */
+    public function profile()
+    {
+        return $this->hasOne(UserProfile::class);
+    }
 }

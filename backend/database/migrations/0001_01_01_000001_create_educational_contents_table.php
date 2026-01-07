@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->enum('category', ['organik', 'anorganik', 'b3']);
-            $table->string('img_url')->nullable();
+            $table->string('image')->nullable();
              $table->foreignId('created_by_admin_id')
                   ->constrained('users')
                   ->onDelete('cascade');

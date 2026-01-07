@@ -13,7 +13,7 @@ class EducationalContent extends Model
         'title',
         'content',
         'category',
-        'image_url',
+        'image',
         'created_by_admin_id',
     ];
 

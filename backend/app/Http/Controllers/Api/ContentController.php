@@ -84,7 +84,7 @@ class ContentController extends Controller
             'title' => $request->title,
             'content' => $request->content,
             'category' => $request->category,
-            'image_url' => $imageUrl,
+            'image' => $imageUrl,
         ]);
 
         return response()->json([

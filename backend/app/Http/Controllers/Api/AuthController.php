@@ -36,7 +36,7 @@ class AuthController extends Controller
             'role' => 'user', // Default role adalah user biasa
         ]);
 
-        // 3. Profil User (untuk simpan poin & scan)
+        // 3. Profil User 
         UserProfile::create([
             'user_id' => $user->id,
             'total_scans' => 0,
