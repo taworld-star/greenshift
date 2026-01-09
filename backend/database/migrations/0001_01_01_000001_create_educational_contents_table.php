@@ -17,14 +17,10 @@ return new class extends Migration
             $table->text('content');
             $table->enum('category', ['organik', 'anorganik', 'b3']);
             $table->string('image')->nullable();
-             $table->foreignId('created_by_admin_id')
-                  ->constrained('users')
-                  ->onDelete('cascade');
             $table->timestamps();
 
             //Index untuk performa query
             $table->index('category');
-            $table->index('created_by_admin_id');
         });
 
     }
