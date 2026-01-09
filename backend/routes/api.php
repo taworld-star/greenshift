@@ -7,9 +7,13 @@ use App\Http\Controllers\Api\ContentController;
 
 // Route untuk Register (Daftar Akun Baru)
 Route::post('/register', [AuthController::class, 'register']);
-
 // Route untuk Login (Masuk)
 Route::post('/login', [AuthController::class, 'login']);
+
+
+// PUBLIC ROUTES
+Route::get('/contents', [ContentController::class, 'index']); 
+Route::get('/contents/{id}', [ContentController::class, 'show']); 
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);

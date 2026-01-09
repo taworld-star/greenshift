@@ -98,7 +98,7 @@ def predict():
         confidence = float(predictions[0][class_index])
         raw_label = labels[class_index]
         
-        # --- CLEANING LABEL ---
+        # CLEANING LABEL 
         # Mengubah "0 Organik" menjadi "organik"
         # Mengubah "1 Non Organik" menjadi "anorganik"
         clean_label = raw_label.lower()
