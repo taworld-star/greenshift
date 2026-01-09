@@ -4,7 +4,7 @@ linter:
   rules:
     - avoid_empty_else
     - avoid_print
-    - avoid_relative_imports
+    - always_use_package_imports
     - avoid_returning_null
     - avoid_slow_async_io
     - cancel_subscriptions

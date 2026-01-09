@@ -35,14 +35,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
 
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
   # REST API & HTTP client
   http: ^1.1.0
   dio: ^5.3.2
- 
 
   # JSON & DATA SERIALIZATION
   json_annotation: ^4.9.0
@@ -59,29 +54,24 @@ dev_dependencies:
   image_picker: ^1.0.4
 
   # ===== CAMERA =====
-  # camera: Akses camera device untuk capture photos/videos
-  # Utama untuk real-time waste classification
   camera: ^0.10.5+5
-  
-  # permission_handler: Manage permissions (camera, photos, location, etc)
-  # Handle iOS dan Android permission requests dengan simple API
   permission_handler: ^11.0.1
 
   # ===== ML & AI =====
-  # google_mlkit_image_labeling: On-device ML Kit untuk image labeling
-  # Mendeteksi dan klasifikasi jenis waste dari foto secara real-time
   google_mlkit_image_labeling: ^0.12.0
 
   # ===== INTERNATIONALIZATION =====
-  # intl: Internationalization dan localization support
-  # Untuk multi-language support dan date/time formatting
   intl: ^0.18.1
 
   # ===== LOGGING & DEBUG =====
-  # logger: Pretty console logging dengan colors dan formatting
-  # Memudahkan debugging dan monitoring app behavior
   logger: ^2.0.0
-  
+
+  # ===== LOCAL STORAGE =====
+  shared_preferences: ^2.2.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
