@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../service/httpservice.dart';
-import '../model/user_model.dart';
+import 'package:greenshift/data/service/httpservice.dart';
+import 'package:greenshift/data/model/user_model.dart';
 
 class AuthRepository {
   final HttpService _httpService = HttpService();
