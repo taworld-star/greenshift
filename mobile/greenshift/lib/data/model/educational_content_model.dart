@@ -26,7 +26,7 @@ class EducationModel {
 
 class Data {
     final int currentPage;
-    final List<Datum> data;
+    final List<EducationalContentModel> data;
     final String firstPageUrl;
     final int? from;
     final int lastPage;
@@ -59,7 +59,7 @@ class Data {
         currentPage: json["current_page"] ?? 1,
         data: json["data"] == null 
             ? [] 
-            : List<Datum>.from(json["data"].map((x) => Datum.fromMap(x))),
+            : List<EducationalContentModel>.from(json["data"].map((x) => EducationalContentModel.fromMap(x))),
         firstPageUrl: json["first_page_url"] ?? "",
         from: json["from"],
         lastPage: json["last_page"] ?? 1,
@@ -92,7 +92,7 @@ class Data {
     };
 }
 
-class Datum {
+class EducationalContentModel {
     final int id;
     final String title;
     final String content;
@@ -102,7 +102,7 @@ class Datum {
     final DateTime? createdAt;
     final DateTime? updatedAt;
 
-    Datum({
+    EducationalContentModel({
         required this.id,
         required this.title,
         required this.content,
@@ -113,7 +113,7 @@ class Datum {
         this.updatedAt,
     });
 
-    factory Datum.fromMap(Map<String, dynamic> json) => Datum(
+    factory EducationalContentModel.fromMap(Map<String, dynamic> json) => EducationalContentModel(
         id: json["id"] ?? 0,
         title: json["title"] ?? "",
         content: json["content"] ?? "",
