@@ -61,6 +61,32 @@ class EducationRepository {
     }
   }
 
+  //Mengupdate konten (role admin)
+  Future<bool> update ({
+    required int id,
+    required String title,
+    required String content,
+    required String category,
+    File? image,
+  }) async {
+    try {
+      final response = await _httpService.postWithFile(
+        '/content/$id',
+        {
+          'title' : title,
+          'content' : content,
+          'category' : category,
+          '_method': 'PUT',
+        },
+        image, 'image',
+      );
+      return response.statusCode == 200;
+    } catch (e) {
+      print("Error update: $e");
+      return false;
+    }
+  }
+
   //Menghapus konten (role admin)
   Future<bool> delete(int id) async {
     try {
