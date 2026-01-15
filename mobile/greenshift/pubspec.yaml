@@ -53,14 +53,14 @@ dependencies:
   # File & Image handling
   image_picker: ^1.0.4
 
-  # ===== CAMERA =====
+  # camera
   camera: ^0.10.5+5
   permission_handler: ^11.0.1
 
-  # ===== ML & AI =====
+  # ML & AI 
   google_mlkit_image_labeling: ^0.12.0
 
-  # ===== INTERNATIONALIZATION =====
+  # internalization
   intl: ^0.18.1
 
   # ===== LOGGING & DEBUG =====
@@ -90,6 +90,10 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  # Assets
+  assets:
+    - assets/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
