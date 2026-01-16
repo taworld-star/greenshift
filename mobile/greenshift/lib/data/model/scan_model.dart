@@ -24,7 +24,7 @@ class ScanModel {
 
     factory ScanModel.fromMap(Map<String, dynamic> json) => ScanModel(
         success: json["success"] ?? false,
-        // Cek dulu apakah "data" ada isinya
+        // Cek "data" apakah ada isinya
         data: json["data"] == null ? null : DashboardData.fromMap(json["data"]),
     );
 
