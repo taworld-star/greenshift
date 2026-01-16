@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:greenshift/data/repository/scan_repository.dart';
-import 'package:greenshift/data/usecase/response/get_dashboard_response.dart';
 import 'package:greenshift/data/usecase/response/get_scan_response.dart';
 import 'package:greenshift/data/model/scan_model.dart';
 import 'package:greenshift/presentation/scan/scan_result_page.dart';
