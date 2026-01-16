@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:greenshift/data/repository/auth_repository.dart';
+import 'package:greenshift/data/usecase/request/login_request.dart';
 import 'package:greenshift/presentation/widgets/green_header.dart';
 import 'package:greenshift/presentation/widgets/custom_text_field.dart';
 import 'package:greenshift/presentation/widgets/green_button.dart';
@@ -36,16 +37,24 @@ class _LoginPageState extends State<LoginPage> {
       _errorMessage = null;
     });
 
-    final response = await _authRepository.login(
-      _emailController.text.trim(),
-      _passwordController.text,
+    // Menggunakan LoginRequest
+    final request = LoginRequest(
+      email: _emailController.text.trim(),
+      password: _passwordController.text,
     );
+
+    final response = await _authRepository.login(request);
 
     setState(() => _isLoading = false);
 
     if (response != null && response.success) {
       if (mounted) {
-        Navigator.pushReplacementNamed(context, '/home');
+        // Navigate berdasarkan role
+        if (response.user?.role == 'admin') {
+          Navigator.pushReplacementNamed(context, '/admin');
+        } else {
+          Navigator.pushReplacementNamed(context, '/home');
+        }
       }
     } else {
       setState(() {

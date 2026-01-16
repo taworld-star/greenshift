@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:greenshift/data/repository/auth_repository.dart';
+import 'package:greenshift/data/usecase/request/register_request.dart';
 import 'package:greenshift/presentation/widgets/custom_text_field.dart';
 import 'package:greenshift/presentation/widgets/green_button.dart';
 import 'package:greenshift/presentation/widgets/green_header.dart';
@@ -41,12 +42,15 @@ class _RegisterPageState extends State<RegisterPage> {
       _errorMessage = null;
     });
 
-    final response = await _authRepository.register(
+    // Menggunakan RegisterRequest
+    final request = RegisterRequest(
       name: _nameController.text.trim(),
       email: _emailController.text.trim(),
       password: _passwordController.text,
       passwordConfirmation: _confirmPasswordController.text,
     );
+
+    final response = await _authRepository.register(request);
 
    if (!mounted) return;
     setState(() => _isLoading = false);
