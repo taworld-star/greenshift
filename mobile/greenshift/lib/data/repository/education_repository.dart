@@ -6,10 +6,10 @@ import 'package:greenshift/data/service/httpservice.dart';
 class EducationRepository {
   final HttpService _httpService = HttpService();
 
-  /// Mengambil semua konten edukasi - Menggunakan GetContentResponse
+  /// Mengambil semua konten edukasi
   Future<GetContentResponse?> getAll({String? category, int page = 1}) async {
     try {
-      String endpoint = '/content?page=$page';
+      String endpoint = '/contents?page=$page';
       if (category != null) endpoint += '&category=$category';
       
       final response = await _httpService.get(endpoint);
@@ -24,10 +24,10 @@ class EducationRepository {
     }
   }
 
-  /// Mengambil detail 1 konten - Menggunakan GetContentDetailResponse
+  /// Mengambil detail 1 konten
   Future<GetContentDetailResponse?> getById(int id) async {
     try {
-      final response = await _httpService.get('/content/$id');
+      final response = await _httpService.get('/contents/$id');
       if (response.statusCode == 200) {
         return GetContentDetailResponse.fromJson(response.body);
       }
@@ -38,11 +38,11 @@ class EducationRepository {
     }
   }
 
-  /// Menambah konten baru (role admin) - Menggunakan EducationRequest
+  /// Menambah konten baru (Admin)
   Future<bool> create(EducationRequest request) async {
     try {
       final response = await _httpService.postWithFile(
-        '/content', 
+        '/admin/contents',
         request.toFields(),
         request.image, 
         'image',
@@ -54,14 +54,14 @@ class EducationRepository {
     }
   }
 
-  /// Mengupdate konten (role admin) - Menggunakan EducationRequest
+  /// Mengupdate konten (Admin)
   Future<bool> update(int id, EducationRequest request) async {
     try {
       final fields = request.toFields();
-      fields['_method'] = 'PUT'; // Laravel method spoofing
+      fields['_method'] = 'PUT';
       
       final response = await _httpService.postWithFile(
-        '/content/$id',
+        '/admin/contents/$id',
         fields,
         request.image,
         'image',
@@ -73,10 +73,10 @@ class EducationRepository {
     }
   }
 
-  /// Menghapus konten (role admin)
+  /// Menghapus konten (Admin)
   Future<bool> delete(int id) async {
     try {
-      final response = await _httpService.delete('/content/$id');
+      final response = await _httpService.delete('/admin/contents/$id');
       return response.statusCode == 200;
     } catch (e) {
       print("Error delete: $e");
