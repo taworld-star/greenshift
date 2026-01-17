@@ -42,12 +42,11 @@ class _ProfilePageState extends State<ProfilePage> {
     );
     if (image != null) {
       setState(() => _profileImagePath = image.path);
-      // TODO: Upload ke backend jika diperlukan
       _showSnackBar('Foto profil berhasil diubah');
     }
   }
 
-  /// Tampilkan dialog Tentang Aplikasi
+  /// Tentang Aplikasi
   void _showAboutDialog() {
     showDialog(
       context: context,
@@ -79,7 +78,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             SizedBox(height: 12),
             Text(
-              '© 2025 GreenShift Team',
+              '© 2025 GreenShift ',
               style: TextStyle(fontSize: 12, color: Colors.grey),
             ),
           ],
@@ -94,7 +93,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  /// Tampilkan dialog Galeri Scan
+  /// Galeri Scan
   void _showScanGalleryDialog() {
     showDialog(
       context: context,
@@ -269,7 +268,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   /// Format tanggal bergabung 
   String _formatJoinDate() {
-    // Untuk sementara pakai bulan dan tahun saat ini
     final now = DateTime.now();
     final months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
     return '${months[now.month - 1]} ${now.year}';
