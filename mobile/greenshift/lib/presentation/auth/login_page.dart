@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
       _errorMessage = null;
     });
 
-    // Menggunakan LoginRequest
+    
     final request = LoginRequest(
       email: _emailController.text.trim(),
       password: _passwordController.text,
@@ -173,6 +173,9 @@ class _LoginPageState extends State<LoginPage> {
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Password tidak boleh kosong';
+        }
+        if (value .length < 6) {
+          return 'Password minimal 6 karakter';
         }
         return null;
       },

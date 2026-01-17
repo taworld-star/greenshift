@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:greenshift/presentation/auth/login_page.dart';
 import 'package:greenshift/presentation/auth/register_page.dart';
 import 'package:greenshift/presentation/home/navbar_setting.dart';
-//import 'package:greenshift/presentation/admin/admin_dashboard_page.dart';
+import 'package:greenshift/presentation/admin/admin_dashboard_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
         '/home': (context) => const NavbarSetting(),
-       // '/admin': (context) => const AdminDashboardPage(),
+       '/admin': (context) => const AdminDashboardPage(),
       },
     );
   }

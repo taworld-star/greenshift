@@ -42,7 +42,6 @@ class _RegisterPageState extends State<RegisterPage> {
       _errorMessage = null;
     });
 
-    // Menggunakan RegisterRequest
     final request = RegisterRequest(
       name: _nameController.text.trim(),
       email: _emailController.text.trim(),
@@ -74,7 +73,8 @@ class _RegisterPageState extends State<RegisterPage> {
           children: [
             const GreenHeader(
               title: 'GreenShift',
-              subtitle: 'Satu langkah menuju Bumi Hijau'
+              subtitle: 'Pelajari cara mengelola sampah dengan benar',
+              
               ),
               Padding(
                 padding: const EdgeInsets.all(24.0),
@@ -117,7 +117,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Widget _buildErrorMessage() {
-    if (_errorMessage == null) return const SizedBox();
+    if (_errorMessage == null) return const SizedBox.shrink();
 
       return Container(
       padding: const EdgeInsets.all(12),
@@ -168,7 +168,7 @@ class _RegisterPageState extends State<RegisterPage> {
         if (value == null || value.isEmpty) {
           return 'Email tidak boleh kosong';
         }
-        if (!value.contains('@')) {
+        if (!value.contains('@') || !(value.contains('.com') || value.contains('.id') || value.contains('student.uisi.ac.id'))) {
           return 'Email tidak valid';
         }
         return null;
