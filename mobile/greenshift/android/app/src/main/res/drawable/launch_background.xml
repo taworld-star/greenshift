@@ -4,10 +4,13 @@
     <!-- Background color: hijau gelap sesuai tema GreenShift -->
     <item android:drawable="@color/splash_background" />
 
-    <!-- Logo di tengah -->
-    <item>
+    <!-- Logo di tengah dengan ukuran lebih kecil -->
+    <item
+        android:width="120dp"
+        android:height="120dp"
+        android:gravity="center">
         <bitmap
-            android:gravity="center"
+            android:gravity="fill"
             android:src="@drawable/logo1" />
     </item>
 </layer-list>

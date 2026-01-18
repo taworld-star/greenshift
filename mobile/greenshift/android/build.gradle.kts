@@ -19,6 +19,13 @@ subprojects {
     project.evaluationDependsOn(":app")
 }
 
+// Suppress Java 8 obsolete warnings for all projects
+allprojects {
+    tasks.withType<JavaCompile>().configureEach {
+        options.compilerArgs.addAll(listOf("-Xlint:-options"))
+    }
+}
+
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
