@@ -20,16 +20,27 @@ class ScanRepository {
       );
 
       if (aiResponse.statusCode == 200) {
-        // 2. Simpan hasil scan ke Laravel backend
-        await _httpService.postWithFile(
-          '/scan',
-          {'result': aiResponse.body},
-          request.image,
-          'image',
-        );
+        // Parse response dari AI
+        final scanResponse = GetScanResponse.fromJson(aiResponse.body);
+        
+        // 2. Menyimpan hasil scan ke Laravel backend dengan format yang benar
+        if (scanResponse.data != null) {
+          final category = scanResponse.data!.category;
+          final confidence = double.tryParse(scanResponse.data!.confidence) ?? 0;
+          
+          await _httpService.postWithFile(
+            '/scan',
+            {
+              'classification_result': category,  // 'organik', 'anorganik', atau 'b3'
+              'confidence': (confidence * 100).toString(),  // Convert to 0-100 scale
+            },
+            request.image,
+            'image',
+          );
+        }
         
         // 3. Return response dari AI
-        return GetScanResponse.fromJson(aiResponse.body);
+        return scanResponse;
       }
       return null;
     } catch (e) {

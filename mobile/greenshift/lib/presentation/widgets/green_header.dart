@@ -26,17 +26,13 @@ class GreenHeader extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Container(
-            width: 80,
-            height: 80,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-            ),
+          // Logo tanpa background putih
+          ClipOval(
             child: logo ?? Image.asset(
-             'assets/logo1.png',
-              width: 50,
-              height: 50,
+              'assets/logo1.png',
+              width: 80,
+              height: 80,
+              fit: BoxFit.cover,
             ),
           ),
           const SizedBox(height: 16),

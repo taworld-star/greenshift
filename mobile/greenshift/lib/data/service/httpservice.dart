@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HttpService {
@@ -87,9 +88,21 @@ class HttpService {
       request.fields.addAll(fields);
 
       if(file != null) {
+        // Determine content type based on file extension
+        String? mimeType;
+        final ext = file.path.toLowerCase();
+        if (ext.endsWith('.jpg') || ext.endsWith('.jpeg')) {
+          mimeType = 'image/jpeg';
+        } else if (ext.endsWith('.png')) {
+          mimeType = 'image/png';
+        } else if (ext.endsWith('.heic') || ext.endsWith('.heif')) {
+          mimeType = 'image/heic';
+        }
+        
         final imageFile = await http.MultipartFile.fromPath(
           fileName,
           file.path,
+          contentType: mimeType != null ? MediaType.parse(mimeType) : null,
         );
         request.files.add(imageFile);
       }

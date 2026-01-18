@@ -98,24 +98,38 @@ def predict():
         confidence = float(predictions[0][class_index])
         raw_label = labels[class_index]
         
+        # DEBUG LOGGING
+        print(f"=== DEBUG PREDICTION ===")
+        print(f"Raw predictions: {predictions[0]}")
+        print(f"Class index: {class_index}")
+        print(f"Confidence: {confidence}")
+        print(f"Raw label: '{raw_label}'")
+        print(f"========================")
+        
         # CLEANING LABEL 
         # Mengubah "0 Organik" menjadi "organik"
         # Mengubah "1 Non Organik" menjadi "anorganik"
-        clean_label = raw_label.lower()
+        # Mengubah "2 B3" menjadi "b3"
+        clean_label = raw_label.lower().strip()
         
-        # Hapus angka di depan (misal "0 ", "1 ")
-        for i in range(10):
-            clean_label = clean_label.replace(str(i), "").strip()
+        # hanya angka prefix dan spasi (misal "0 ", "1 ", "2 ")
+        # Jangan hapus angka di dalam kata seperti "b3"
+        if len(clean_label) > 2 and clean_label[0].isdigit() and clean_label[1] == ' ':
+            clean_label = clean_label[2:].strip()
+        
+        print(f"Clean label: '{clean_label}'")  # Debug
             
-        # Normalisasi nama biar cocok dengan dictionary keys ('organik', 'anorganik', 'b3')
-        if "non" in clean_label or "anorganik" in clean_label:
+        # Normalisasi nama - PENTING: cek B3 DULU sebelum organik!
+        if "b3" in clean_label or "b 3" in clean_label or clean_label == "b3":
+            final_key = "b3"
+        elif "non" in clean_label or "anorganik" in clean_label:
             final_key = "anorganik"
         elif "organik" in clean_label:
             final_key = "organik"
-        elif "b3" in clean_label or "battery" in clean_label:
-            final_key = "b3"
         else:
             final_key = "unknown"
+        
+        print(f"Final key: '{final_key}'")  # Debug
 
         # BUILD ALL PREDICTIONS
         # Membuat daftar persentase untuk semua kemungkinan
@@ -129,14 +143,16 @@ def predict():
             score = float(predictions[0][i])
             all_preds[clean_name] = round(score, 4)
 
-        # Prepare Response
+        # Prepare Response 
         response = {
             'success': True,
-            'classification': final_key.capitalize(), # Jadi "Organik"
-            'confidence': round(confidence, 4),
-            'description': DESCRIPTIONS.get(final_key, 'Kategori tidak dikenali'),
-            'disposal_method': DISPOSAL_METHODS.get(final_key, 'Hubungi petugas kebersihan.'),
-            'all_predictions': all_preds # Semua prediksi dengan skor
+            'data': {
+                'category': final_key,  # 'organik', 'anorganik', atau 'b3'
+                'label': DESCRIPTIONS.get(final_key, 'Kategori tidak dikenali'),
+                'confidence': str(round(confidence, 4)),
+                'tips': DISPOSAL_METHODS.get(final_key, 'Hubungi petugas kebersihan.'),
+            },
+            'all_predictions': all_preds  
         }
         
         return jsonify(response), 200

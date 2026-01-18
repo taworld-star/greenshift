@@ -341,10 +341,14 @@ class _ContentFormSheetState extends State<ContentFormSheet> {
       // CREATE
       success = await _repository.create(request);
     }
+    
+    print("Save result: $success"); // Debug
+    
     setState(() => _isLoading = false);
-    if (success) {
+    
+    if (success && mounted) {
       widget.onSaved(); 
-    } else {
+    } else if (!success) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Gagal menyimpan. Periksa koneksi.'),

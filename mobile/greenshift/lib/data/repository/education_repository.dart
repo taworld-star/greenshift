@@ -66,7 +66,8 @@ class EducationRepository {
         request.image,
         'image',
       );
-      return response.statusCode == 200;
+      print("Update response: ${response.statusCode} - ${response.body}");
+      return response.statusCode == 200 || response.statusCode == 201;
     } catch (e) {
       print("Error update: $e");
       return false;
