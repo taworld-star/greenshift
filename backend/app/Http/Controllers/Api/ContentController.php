@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\EducationalContent; 
+use App\Models\EducationalContent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -59,7 +59,7 @@ class ContentController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'category' => 'required|in:organik,anorganik,b3', 
+            'category' => 'required|in:organik,anorganik,b3',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,heic, heif|max:5120', // Max 5MB
         ]);
 
@@ -117,16 +117,16 @@ class ContentController extends Controller
 
         // Cek upload gambar baru
         if ($request->hasFile('image')) {
-            // Menghapus gambar lama jika ada
-            if ($content->image_url) {
+            // Menghapus gambar lama 
+            if ($content->image) {
                 // Mengambil path relatif dari URL lengkap
-                $oldPath = str_replace(asset('storage/'), '', $content->image_url);
+                $oldPath = str_replace(asset('storage/'), '', $content->image);
                 Storage::disk('public')->delete($oldPath);
             }
 
             // Upload gambar baru
             $path = $request->file('image')->store('contents', 'public');
-            $content->image_url = asset('storage/' . $path);
+            $content->image = asset('storage/' . $path);
         }
 
         // Update data teks
@@ -150,8 +150,8 @@ class ContentController extends Controller
         }
 
         // Menghapus file gambar dari folder penyimpanan
-        if ($content->image_url) {
-            $path = str_replace(asset('storage/'), '', $content->image_url);
+        if ($content->image) {
+            $path = str_replace(asset('storage/'), '', $content->image);
             Storage::disk('public')->delete($path);
         }
 

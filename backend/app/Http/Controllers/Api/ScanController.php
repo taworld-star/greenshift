@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\ScanHistory;
+use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -89,6 +90,23 @@ class ScanController extends Controller
             'image_path' => $imageUrl, 
             'description' => $request->description ?? null, 
         ]);
+
+        // Update user_profiles: total_scans dan points (green score)
+        $userId = $request->user()->id;
+        $allScans = ScanHistory::where('user_id', $userId)->get();
+        $totalScans = $allScans->count();
+        
+        // Hitung green score: (organik + anorganik) / total * 100
+        $organikCount = $allScans->where('classification_result', 'organik')->count();
+        $anorganikCount = $allScans->where('classification_result', 'anorganik')->count();
+        $goodTrash = $organikCount + $anorganikCount;
+        $greenScore = $totalScans > 0 ? round(($goodTrash / $totalScans) * 100) : 0;
+        
+        // Update atau create profile
+        UserProfile::updateOrCreate(
+            ['user_id' => $userId],
+            ['total_scans' => $totalScans, 'points' => $greenScore]
+        );
 
         return response()->json([
             'success' => true,

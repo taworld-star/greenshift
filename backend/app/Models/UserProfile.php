@@ -15,6 +15,8 @@ class UserProfile extends Model
         'phone_number',
         'address',
         'profile_picture',
+        'total_scans',
+        'points',
     ];
 
     // Relasi ke User
