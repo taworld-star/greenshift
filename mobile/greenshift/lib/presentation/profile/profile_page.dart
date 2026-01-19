@@ -78,7 +78,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             SizedBox(height: 12),
             Text(
-              '© 2025 GreenShift ',
+              '© 2026 GreenShift ',
               style: TextStyle(fontSize: 12, color: Colors.grey),
             ),
           ],

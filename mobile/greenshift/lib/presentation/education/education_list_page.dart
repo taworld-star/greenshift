@@ -17,11 +17,11 @@ class _EducationListPageState extends State<EducationListPage> {
   // State variables
   List<EducationalContentModel> _contents = [];
   bool _isLoading = true;
+  bool _isLoadingMore = false;
   String _selectedCategory = 'Semua';
   int _currentPage = 1;
   bool _hasMore = true;
 
-  // Daftar kategori filter
   final List<String> _categories = ['Semua', 'Organik', 'Daur Ulang', 'Berbahaya'];
 
   @override
@@ -202,10 +202,12 @@ class _EducationListPageState extends State<EducationListPage> {
         padding: const EdgeInsets.symmetric(horizontal: 24),
         itemCount: _contents.length + (_hasMore ? 1 : 0),
         itemBuilder: (context, index) {
-          // Load more indicator
           if (index == _contents.length) {
-            _currentPage++;
-            _loadContents();
+            if (!_isLoadingMore) {
+              _isLoadingMore = true;
+              _currentPage++;
+              _loadContents().then((_) => _isLoadingMore = false);
+            }
             return const Padding(
               padding: EdgeInsets.all(16),
               child: Center(child: CircularProgressIndicator(color: Colors.green)),

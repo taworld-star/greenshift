@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:greenshift/presentation/auth/login_page.dart';
 import 'package:greenshift/presentation/auth/register_page.dart';
 import 'package:greenshift/presentation/home/navbar_setting.dart';
 import 'package:greenshift/presentation/admin/admin_dashboard_page.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await initializeDateFormatting('id_ID', null);
   runApp(const MyApp());
 }
 

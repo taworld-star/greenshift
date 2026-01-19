@@ -33,7 +33,7 @@ class _EducationDetailPageState extends State<EducationDetailPage> {
   Future<void> _loadArticle() async {
     final result = await _educationRepository.getById(widget.articleId);
     setState(() {
-      _article = result?.data;  // GetContentDetailResponse.data
+      _article = result?.data;  
       _isLoading = false;
     });
   }

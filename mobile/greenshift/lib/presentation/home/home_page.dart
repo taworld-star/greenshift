@@ -94,16 +94,12 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        Container(
-          width: 50,
-          height: 50,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.asset('assets/logo1.png', fit: BoxFit.contain),
+        ClipOval(
+          child: Image.asset(
+            'assets/logo1.png',
+            width: 50,
+            height: 50,
+            fit: BoxFit.cover,
           ),
         ),
       ],

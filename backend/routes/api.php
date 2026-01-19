@@ -28,7 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware('admin')->group(function () {
         // CRUD Konten
         Route::post('/admin/contents', [ContentController::class, 'store']);
-        Route::post('/admin/contents/{id}', [ContentController::class, 'update']); 
+        Route::match(['post', 'put'], '/admin/contents/{id}', [ContentController::class, 'update']); 
         Route::delete('/admin/contents/{id}', [ContentController::class, 'destroy']);
         
         // Test Route 
