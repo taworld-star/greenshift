@@ -372,7 +372,6 @@ class ScanResultPage extends StatelessWidget {
     switch (classification.toLowerCase()) {
       case 'organik':
         return [
-          'Pisahkan dari sampah lainnya',
           'Dapat dijadikan kompos untuk pupuk tanaman',
           'Simpan di tempat sampah organik (HIJAU)',
           'Hindari mencampur dengan plastik',
@@ -388,7 +387,7 @@ class ScanResultPage extends StatelessWidget {
       case 'b3':
       case 'berbahaya':
         return [
-          'JANGAN buang ke tempat sampah biasa!',
+          'JANGAN buang ke tempat sampah biasa',
           'Simpan di wadah tertutup khusus',
           'Serahkan ke tempat pengumpulan B3',
           'Jauhkan dari jangkauan anak-anak',

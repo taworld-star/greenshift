@@ -100,7 +100,7 @@ class AuthRepository {
     return prefs.getString('auth_token');
   }
 
-  // === PRIVATE METHODS ===
+  // PRIVATE METHODS 
 
   Future<void> _saveToken(String token) async {
     final prefs = await SharedPreferences.getInstance();

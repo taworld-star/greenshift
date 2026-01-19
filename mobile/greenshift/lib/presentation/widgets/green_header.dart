@@ -26,7 +26,6 @@ class GreenHeader extends StatelessWidget {
       ),
       child: Column(
         children: [
-          // Logo tanpa background putih
           ClipOval(
             child: logo ?? Image.asset(
               'assets/logo1.png',

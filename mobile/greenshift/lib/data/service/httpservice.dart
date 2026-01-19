@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HttpService {
   //Konfigurasi IP 
-  static const String _ipUrl = "192.168.1.8";
+  static const String _ipUrl = "192.168.0.111";
   final String baseUrl = "http://$_ipUrl:8000/api";
   final String aiUrl = "http://$_ipUrl:5000";
 

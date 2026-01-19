@@ -78,7 +78,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             SizedBox(height: 12),
             Text(
-              '© 2026 GreenShift ',
+              '2026 GreenShift ',
               style: TextStyle(fontSize: 12, color: Colors.grey),
             ),
           ],
@@ -100,7 +100,7 @@ class _ProfilePageState extends State<ProfilePage> {
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: const Text('Galeri Scan'),
-        content: const Text('Fitur galeri scan akan segera hadir!'),
+        content: const Text('Fitur galeri akan segera diupdate!'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -117,12 +117,12 @@ class _ProfilePageState extends State<ProfilePage> {
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text('Konfirmasi Keluar'),
-        content: const Text('Apakah Anda yakin ingin keluar dari aplikasi?'),
+        title: const Text('Logout'),
+        content: const Text('Yakin ingin keluar?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Batal'),
+            child: const Text('Tidak'),
           ),
           ElevatedButton(
             onPressed: () async {
