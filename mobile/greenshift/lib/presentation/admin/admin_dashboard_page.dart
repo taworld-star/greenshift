@@ -244,13 +244,13 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
   Widget _buildBadge(String category) {
     final colors = {
       'organik': Colors.green,
-      'anorganik': Colors.blue,
-      'b3': Colors.red,
+      'daur_ulang': Colors.blue,
+      'berbahaya': Colors.red,
     };
     final labels = {
       'organik': 'Organik',
-      'anorganik': 'Anorganik', 
-      'b3': 'B3',
+      'daur_ulang': 'Daur Ulang', 
+      'berbahaya': 'Berbahaya',
     };
     
     final color = colors[category] ?? Colors.grey;
@@ -290,8 +290,8 @@ class _ContentFormSheetState extends State<ContentFormSheet> {
   
   final List<Map<String, String>> _categories = [
     {'key': 'organik', 'label': 'Organik'},
-    {'key': 'anorganik', 'label': 'Anorganik'},
-    {'key': 'b3', 'label': 'B3 (Berbahaya)'},
+    {'key': 'daur_ulang', 'label': 'Daur Ulang'},
+    {'key': 'berbahaya', 'label': 'Berbahaya'},
   ];
 
   @override

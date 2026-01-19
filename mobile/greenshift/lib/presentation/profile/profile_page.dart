@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:greenshift/data/repository/auth_repository.dart';
@@ -202,8 +204,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 backgroundColor: Colors.white,
                 child: _profileImagePath != null
                     ? ClipOval(
-                        child: Image.asset(
-                          _profileImagePath!,
+                        child: Image.file(
+                          File(_profileImagePath!),
                           width: 96,
                           height: 96,
                           fit: BoxFit.cover,
