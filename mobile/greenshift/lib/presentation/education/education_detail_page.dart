@@ -192,10 +192,10 @@ class _EducationDetailPageState extends State<EducationDetailPage> {
     switch (category.toLowerCase()) {
       case 'organik':
         return 'Organik';
-      case 'daur_ulang':
-        return 'Daur Ulang';
-      case 'berbahaya':
-        return 'Berbahaya';
+      case 'anorganik':
+        return 'Anorganik';
+      case 'b3':
+        return 'B3 (Berbahaya)';
       default:
         return category;
     }
@@ -206,9 +206,9 @@ class _EducationDetailPageState extends State<EducationDetailPage> {
     switch (category.toLowerCase()) {
       case 'organik':
         return const Color(0xFF66BB6A);
-      case 'daur_ulang':
+      case 'anorganik':
         return const Color(0xFF42A5F5);
-      case 'berbahaya':
+      case 'b3':
         return const Color(0xFFEF5350);
       default:
         return Colors.green;

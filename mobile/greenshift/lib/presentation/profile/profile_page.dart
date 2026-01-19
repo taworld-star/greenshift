@@ -128,8 +128,8 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.pop(context); // Tutup dialog konfirmasi
-              _performLogout(); // Jalankan logout
+              Navigator.pop(context); // Menutup dialog konfirmasi
+              _performLogout(); 
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red,

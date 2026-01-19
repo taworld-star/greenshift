@@ -22,7 +22,7 @@ class _EducationListPageState extends State<EducationListPage> {
   int _currentPage = 1;
   bool _hasMore = true;
 
-  final List<String> _categories = ['Semua', 'Organik', 'Daur Ulang', 'Berbahaya'];
+  final List<String> _categories = ['Semua', 'Organik', 'Anorganik', 'B3 (Berbahaya)'];
 
   @override
   void initState() {
@@ -67,10 +67,10 @@ class _EducationListPageState extends State<EducationListPage> {
     switch (category) {
       case 'Organik':
         return 'organik';
-      case 'Daur Ulang':
-        return 'daur_ulang';
-      case 'Berbahaya':
-        return 'berbahaya';
+      case 'Anorganik':
+        return 'anorganik';
+      case 'B3 (Berbahaya)':
+        return 'b3';
       default:
         return category.toLowerCase();
     }
@@ -322,10 +322,10 @@ class _EducationListPageState extends State<EducationListPage> {
     switch (category.toLowerCase()) {
       case 'organik':
         return 'Organik';
-      case 'daur_ulang':
-        return 'Daur Ulang';
-      case 'berbahaya':
-        return 'Berbahaya';
+      case 'anorganik':
+        return 'Anorganik';
+      case 'b3':
+        return 'B3 (Berbahaya)';
       default:
         return category;
     }
@@ -336,9 +336,9 @@ class _EducationListPageState extends State<EducationListPage> {
     switch (category.toLowerCase()) {
       case 'organik':
         return const Color(0xFF66BB6A);
-      case 'daur_ulang':
+      case 'anorganik':
         return const Color(0xFF42A5F5);
-      case 'berbahaya':
+      case 'b3':
         return const Color(0xFFEF5350);
       default:
         return Colors.green;

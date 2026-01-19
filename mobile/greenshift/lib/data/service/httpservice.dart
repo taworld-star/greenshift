@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HttpService {
   //Konfigurasi IP 
-  static const String _ipUrl = "192.168.0.111";
+  static const String _ipUrl = "192.168.1.8";
   final String baseUrl = "http://$_ipUrl:8000/api";
   final String aiUrl = "http://$_ipUrl:5000";
 
@@ -88,7 +88,6 @@ class HttpService {
       request.fields.addAll(fields);
 
       if(file != null) {
-        // Determine content type based on file extension
         String? mimeType;
         final ext = file.path.toLowerCase();
         if (ext.endsWith('.jpg') || ext.endsWith('.jpeg')) {
