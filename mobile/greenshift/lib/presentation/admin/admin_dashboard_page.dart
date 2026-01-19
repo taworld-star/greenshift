@@ -90,8 +90,25 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
   }
   /// Logout admin
   void _logout() async {
-    await AuthRepository().logout();
-    if (mounted) Navigator.pushReplacementNamed(context, '/login');
+    // Tampilkan loading indicator
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(color: Colors.white),
+      ),
+    );
+
+    try {
+      await AuthRepository().logout();
+    } catch (e) {
+      debugPrint('Logout error: $e');
+    }
+
+    if (mounted) {
+      Navigator.pop(context); // Tutup loading
+      Navigator.pushReplacementNamed(context, '/login');
+    }
   }
   /// snackbar
   void _showMessage(String text, Color color) {

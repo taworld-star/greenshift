@@ -127,12 +127,9 @@ class _ProfilePageState extends State<ProfilePage> {
             child: const Text('Tidak'),
           ),
           ElevatedButton(
-            onPressed: () async {
-              Navigator.pop(context);
-              await AuthRepository().logout();
-              if (mounted) {
-                Navigator.pushReplacementNamed(context, '/login');
-              }
+            onPressed: () {
+              Navigator.pop(context); // Tutup dialog konfirmasi
+              _performLogout(); // Jalankan logout
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red,
@@ -143,6 +140,28 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       ),
     );
+  }
+
+  /// Melakukan proses logout dengan loading indicator
+  Future<void> _performLogout() async {
+    // loading dialog
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(color: Colors.green),
+      ),
+    );
+
+    try {
+      await AuthRepository().logout();
+    } catch (e) {
+      debugPrint('Logout error: $e');
+    }
+    if (mounted) {
+      Navigator.pop(context); 
+      Navigator.pushReplacementNamed(context, '/login');
+    }
   }
 
   void _showSnackBar(String message) {
